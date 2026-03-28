@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -20,16 +21,329 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Empty struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Empty) Reset() {
+	*x = Empty{}
+	mi := &file_quote_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Empty) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Empty) ProtoMessage() {}
+
+func (x *Empty) ProtoReflect() protoreflect.Message {
+	mi := &file_quote_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
+	return file_quote_proto_rawDescGZIP(), []int{0}
+}
+
+type CategoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Category      string                 `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryRequest) Reset() {
+	*x = CategoryRequest{}
+	mi := &file_quote_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryRequest) ProtoMessage() {}
+
+func (x *CategoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_quote_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryRequest.ProtoReflect.Descriptor instead.
+func (*CategoryRequest) Descriptor() ([]byte, []int) {
+	return file_quote_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CategoryRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+type Quote struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Text          string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
+	Author        string                 `protobuf:"bytes,3,opt,name=author,proto3" json:"author,omitempty"`
+	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Quote) Reset() {
+	*x = Quote{}
+	mi := &file_quote_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Quote) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Quote) ProtoMessage() {}
+
+func (x *Quote) ProtoReflect() protoreflect.Message {
+	mi := &file_quote_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Quote.ProtoReflect.Descriptor instead.
+func (*Quote) Descriptor() ([]byte, []int) {
+	return file_quote_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Quote) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Quote) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *Quote) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *Quote) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+type AddQuoteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Text          string                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Author        string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddQuoteRequest) Reset() {
+	*x = AddQuoteRequest{}
+	mi := &file_quote_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddQuoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddQuoteRequest) ProtoMessage() {}
+
+func (x *AddQuoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_quote_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddQuoteRequest.ProtoReflect.Descriptor instead.
+func (*AddQuoteRequest) Descriptor() ([]byte, []int) {
+	return file_quote_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AddQuoteRequest) GetText() string {
+	if x != nil {
+		return x.Text
+	}
+	return ""
+}
+
+func (x *AddQuoteRequest) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *AddQuoteRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+type AddQuoteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddQuoteResponse) Reset() {
+	*x = AddQuoteResponse{}
+	mi := &file_quote_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddQuoteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddQuoteResponse) ProtoMessage() {}
+
+func (x *AddQuoteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_quote_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddQuoteResponse.ProtoReflect.Descriptor instead.
+func (*AddQuoteResponse) Descriptor() ([]byte, []int) {
+	return file_quote_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AddQuoteResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AddQuoteResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AddQuoteResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_quote_proto protoreflect.FileDescriptor
 
 const file_quote_proto_rawDesc = "" +
 	"\n" +
-	"\vquote.proto\x12\x05quoteB1Z/github.com/LuhTonkaYeat/quote-service/api/protob\x06proto3"
+	"\vquote.proto\x12\x05quote\"\a\n" +
+	"\x05Empty\"-\n" +
+	"\x0fCategoryRequest\x12\x1a\n" +
+	"\bcategory\x18\x01 \x01(\tR\bcategory\"_\n" +
+	"\x05Quote\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04text\x18\x02 \x01(\tR\x04text\x12\x16\n" +
+	"\x06author\x18\x03 \x01(\tR\x06author\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\"Y\n" +
+	"\x0fAddQuoteRequest\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x12\x16\n" +
+	"\x06author\x18\x02 \x01(\tR\x06author\x12\x1a\n" +
+	"\bcategory\x18\x03 \x01(\tR\bcategory\"V\n" +
+	"\x10AddQuoteResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage2\xab\x01\n" +
+	"\fQuoteService\x12'\n" +
+	"\tGetRandom\x12\f.quote.Empty\x1a\f.quote.Quote\x125\n" +
+	"\rGetByCategory\x12\x16.quote.CategoryRequest\x1a\f.quote.Quote\x12;\n" +
+	"\bAddQuote\x12\x16.quote.AddQuoteRequest\x1a\x17.quote.AddQuoteResponseB1Z/github.com/LuhTonkaYeat/quote-service/api/protob\x06proto3"
 
-var file_quote_proto_goTypes = []any{}
+var (
+	file_quote_proto_rawDescOnce sync.Once
+	file_quote_proto_rawDescData []byte
+)
+
+func file_quote_proto_rawDescGZIP() []byte {
+	file_quote_proto_rawDescOnce.Do(func() {
+		file_quote_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_quote_proto_rawDesc), len(file_quote_proto_rawDesc)))
+	})
+	return file_quote_proto_rawDescData
+}
+
+var file_quote_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_quote_proto_goTypes = []any{
+	(*Empty)(nil),            // 0: quote.Empty
+	(*CategoryRequest)(nil),  // 1: quote.CategoryRequest
+	(*Quote)(nil),            // 2: quote.Quote
+	(*AddQuoteRequest)(nil),  // 3: quote.AddQuoteRequest
+	(*AddQuoteResponse)(nil), // 4: quote.AddQuoteResponse
+}
 var file_quote_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
+	0, // 0: quote.QuoteService.GetRandom:input_type -> quote.Empty
+	1, // 1: quote.QuoteService.GetByCategory:input_type -> quote.CategoryRequest
+	3, // 2: quote.QuoteService.AddQuote:input_type -> quote.AddQuoteRequest
+	2, // 3: quote.QuoteService.GetRandom:output_type -> quote.Quote
+	2, // 4: quote.QuoteService.GetByCategory:output_type -> quote.Quote
+	4, // 5: quote.QuoteService.AddQuote:output_type -> quote.AddQuoteResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -46,12 +360,13 @@ func file_quote_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_quote_proto_rawDesc), len(file_quote_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   5,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_quote_proto_goTypes,
 		DependencyIndexes: file_quote_proto_depIdxs,
+		MessageInfos:      file_quote_proto_msgTypes,
 	}.Build()
 	File_quote_proto = out.File
 	file_quote_proto_goTypes = nil

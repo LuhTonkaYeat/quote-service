@@ -4,3 +4,33 @@ package quote;
 
 option go_package = "github.com/LuhTonkaYeat/quote-service/api/proto";
 
+service QuoteService {
+  rpc GetRandom(Empty) returns (Quote);
+  rpc GetByCategory(CategoryRequest) returns (Quote);
+  rpc AddQuote(AddQuoteRequest) returns (AddQuoteResponse);
+}
+
+message Empty {}
+
+message CategoryRequest {
+  string category = 1;
+}
+
+message Quote {
+  string id = 1;
+  string text = 2;
+  string author = 3;
+  string category = 4;
+}
+
+message AddQuoteRequest {
+  string text = 1;
+  string author = 2;
+  string category = 3;
+}
+
+message AddQuoteResponse {
+  string id = 1;
+  bool success = 2;
+  string message = 3;
+}

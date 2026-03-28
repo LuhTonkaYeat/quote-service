@@ -155,3 +155,10 @@ func (r *SQLiteQuoteRepository) GetAll() ([]*domain.Quote, error) {
 
 	return quotes, nil
 }
+
+func (r *SQLiteQuoteRepository) Close() error {
+	if r.db != nil {
+		return r.db.Close()
+	}
+	return nil
+}

@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package quote;
+
+option go_package = "github.com/LuhTonkaYeat/quote-service/api/proto";
+
